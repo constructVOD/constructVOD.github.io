@@ -1,0 +1,29 @@
+﻿{
+	"version": 1579123243,
+	"fileList": [
+		"data.js",
+		"c2runtime.js",
+		"jquery-3.4.1.min.js",
+		"offlineClient.js",
+		"images/player-sheet0.png",
+		"images/enemy-sheet0.png",
+		"images/enemy-sheet1.png",
+		"images/tiledbackground.png",
+		"images/rock-sheet0.png",
+		"images/bones-sheet0.png",
+		"media/warn1.m4a",
+		"media/warn1.ogg",
+		"media/warn2.m4a",
+		"media/warn2.ogg",
+		"media/step1.m4a",
+		"media/step1.ogg",
+		"media/bite.m4a",
+		"media/bite.ogg",
+		"icon-16.png",
+		"icon-32.png",
+		"icon-114.png",
+		"icon-128.png",
+		"icon-256.png",
+		"loading-logo.png"
+	]
+}
