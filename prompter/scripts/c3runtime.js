@@ -808,6 +808,7 @@ self.C3_JsPropNameTable = [
 			return () => and(and(n0.ExpObject(), " x "), n1.ExpObject());
 		},
 		() => "Not supported! Try using Chrome",
+		() => 9999,
 		() => "video",
 		() => 99,
 		() => "snapshot",
@@ -821,9 +822,7 @@ self.C3_JsPropNameTable = [
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpObject() - n1.ExpObject());
-		},
-		() => 9000,
-		() => 4000
+		}
 	];
 }
 
