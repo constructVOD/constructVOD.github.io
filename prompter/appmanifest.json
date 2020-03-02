@@ -1,7 +1,7 @@
 {
 	"name": "Camera input",
 	"short_name": "Camera input",
-	"description": "",
+	"description": "prompter1.11",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "portrait",
