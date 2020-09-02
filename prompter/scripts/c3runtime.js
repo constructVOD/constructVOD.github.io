@@ -3065,8 +3065,6 @@ value:this.WaveFunc(this._i)*this._mag}]}]}}};
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpObject() - n1.ExpObject());
 		},
-		() => 800,
-		() => 999,
 		() => 24,
 		() => 248
 	];
