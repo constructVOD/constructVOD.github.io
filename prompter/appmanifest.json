@@ -1,7 +1,7 @@
 {
-	"name": "Camera input",
-	"short_name": "Camera input",
-	"description": "prompter1.11",
+	"name": "Teleprompter",
+	"short_name": "Teleprompter",
+	"description": "prompter1.13",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "portrait",
