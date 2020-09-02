@@ -1,0 +1,315 @@
+﻿body
+{
+	background-color: white;
+	color: black;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: "Segoe UI", sans-serif;
+	font-size: 10pt;
+}
+
+#side
+{
+	height: 300px;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;		/* aligned bottom */
+}
+
+#main
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;			/* aligned top */
+	bottom: 300px;
+	right: 0px;
+	background-color: black;
+}
+
+iframe
+{
+	border: none;
+}
+
+#iframewrap
+{
+	overflow: hidden;
+}
+
+#leftpane
+{
+	width: 25%;
+	float: left;
+	background-color: white;
+	overflow-y: auto;
+}
+
+#rightpane
+{
+	width: 75%;
+	float: right;
+	background-color: #ddd;
+	overflow-y: auto;
+	outline-left: 3px solid #888;
+}
+
+#perfpane
+{
+	display: none;
+	width: 100%;
+	background-color: #ddd;
+	overflow-y: auto;
+}
+
+#watchpane
+{
+	display: none;
+	width: 100%;
+	background-color: #ddd;
+	overflow-y: auto;
+}
+
+#objectlist {
+	list-style-type: none;
+	padding-left: 10px;
+}
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: moz-none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* For collapsing/expanding menus */
+li.obj-collapsed > .wrapbox {
+	display: none;
+}
+
+li.obj-collapsed:before {
+	content: url(debugger-collapsed.png);
+}
+
+li.obj-expanded:before {
+	content: url(debugger-expanded.png);
+}
+
+li.obj-expanded {
+	padding-top: 3px;
+}
+
+li.obj-collapsed {
+	padding-top: 3px;
+}
+
+a.obj-item {
+	cursor: pointer;
+}
+
+a.obj-item:hover {
+	text-decoration: underline;
+}
+
+a.disabled {
+	cursor: default;
+	color: #bbb;
+}
+
+a.disabled:hover {
+	cursor: default;
+	text-decoration: none;
+}
+
+a.container-link {
+	color: blue;
+}
+
+/* scroll long instance lists in the object list */
+div.wrapbox {
+	height: 100px;
+	overflow-y: auto;
+}
+
+#topbar {
+	padding-left: 10px;
+	padding-bottom: 4px;
+	background-color: #555;
+	color: white;
+	font-size: 1.2em;
+}
+
+#status {
+	margin-left: 10px;
+}
+
+#controls {
+	display: none;
+	float: right;
+	margin-right: 3px;
+}
+
+.barbutton {
+	border: 1px solid #333;
+	background-color: #777;
+	padding-left: 4px;
+	padding-right: 4px;
+	font-size: 0.9em;
+}
+
+.barbutton.disabled {
+	background-color: #555;
+}
+
+#tabs {
+	display: none;
+	float: right;
+	margin-right: 3px;
+}
+
+.tab {
+	border-left: 2px solid #333;
+	border-right: 2px solid #333;
+	border-top: 2px solid #333;
+	background-color: #ddd;
+	font-size: 0.9em;
+	color: black;
+	padding-left: 4px;
+	padding-right: 4px;
+	position: relative;
+	top: 4px;
+}
+
+.tab.inactive {
+	background-color: #777;
+	color: white;
+}
+
+a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#perfstats {
+	color: #bbb;
+}
+
+.propertycontainer {
+	padding-top: 10px;
+	padding-left: 10px;
+	-webkit-column-width: 290px;
+	-moz-column-width: 290px;
+	-ms-column-width: 290px;
+	column-width: 290px;
+}
+
+h3.property-section {
+	margin-top: 0px;
+	margin-bottom: 3px;
+}
+
+table.property-table {
+	background-color: white;
+	border: 1px solid #bbb;
+	border-collapse: collapse;
+	border-spacing: 0px;
+	margin-bottom: 10px;
+	width: 95%;
+}
+
+.property-name {
+	width: 35%;
+	border-right: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+	padding: 3px 5px;
+}
+
+.property-value {
+	border-bottom: 1px solid #bbb;
+	padding: 3px 5px;
+	word-break: break-all;
+}
+
+.property-readonly {
+	background-color: #e8e8e8;
+	cursor: default;
+}
+
+.property-edited {
+	font-weight: bold;
+}
+
+.nobreakinside {
+	-webkit-page-break-inside: avoid;
+	-moz-page-break-inside: avoid;
+	-ms-page-break-inside: avoid;
+	page-break-inside: avoid;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	-ms-column-break-inside: avoid;
+	column-break-inside: avoid;
+	-webkit-break-inside: avoid-column;
+	-moz-break-inside: avoid-column;
+	-ms-break-inside: avoid-column;
+	break-inside: avoid-column;
+}
+
+#gripper {
+	cursor: ns-resize;
+}
+
+/* control to edit property values */
+#editvalue {
+	position: absolute;
+	padding-left: 4px;
+	font-family: "Segoe UI", sans-serif;
+	font-size: 10pt;
+}
+
+#editvaluebool {
+	position: absolute;
+	font-family: "Segoe UI", sans-serif;
+	font-size: 10pt;
+}
+
+#perfnote {
+	margin-top: 0;
+	margin-left: 4px;
+}
+
+#perftablewrap {
+	margin-bottom: 20px;
+	margin-left: 4px;
+}
+
+.perftable {
+	border-collapse: collapse;
+	margin-top: 4px;
+}
+
+.perfitem {
+	text-align: right;
+	border: 1px solid #88B;
+	padding: 4px;
+	background-color: #F0F0FF;
+}
+
+.perfvalue {
+	border: 1px solid #88B;
+	padding: 4px;
+	background-color: white;
+}
+
+.watch-icon {
+	float: right;
+	cursor: pointer;
+}
+
+.watch-icon-header {
+	cursor: pointer;
+	position: relative;
+	top: 0.19em;
+}

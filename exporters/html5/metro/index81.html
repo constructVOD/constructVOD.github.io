@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	
+	<!-- This ensures the canvas works on IE9+.  Don't remove it! -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<title>{title}</title>
+	<!-- Note: running this exported project from disk may not work exactly like preview, since browsers block some features on the file:// protocol.  Once you've uploaded it to a server, it should work OK. -->
+	
+    <!-- This outlines the canvas with a black border and makes the page background black. -->
+	<style type="text/css">
+		canvas { border: 1px solid black; -ms-touch-action: none; touch-action: none; }
+		body { background-color: black; color: white; }
+	</style>
+
+	<script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+{cssdependencies}
+</head> 
+ 
+<body> 
+	<div id="fb-root"></div>
+	<div style="text-align: center;">
+
+        <!-- The canvas the project will render to.  If you change its ID, don't forget to change the
+        ID the runtime looks for in the jQuery ready event (above). -->
+		<canvas id="c2canvas" width="{width}" height="{height}" oncontextmenu="return false;" onselectstart="return false;">
+            The browser appears to have HTML5 disabled.  Try checking the compatibility settings.
+		</canvas>
+
+        <br />
+		
+{tagline}
+	</div>
+	
+	<script src="jquery-3.4.1.min.js"></script>
+
+{dependencies}
+	
+    <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
+    This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
+	<script src="c2runtime.js"></script>
+
+    <script>
+	(function () {
+		"use strict";
+		var app = WinJS.Application;
+
+		// Start the Construct 2 project running on window load.
+		jQuery(document).ready(function ()
+		{
+			// Indicate Windows 8 platform
+			window["c2isWindows8"] = true;
+			
+			// Create new runtime using the c2canvas
+			cr_createRuntime("c2canvas");
+			
+			app.start();
+		});
+		
+		var activation = Windows.ApplicationModel.Activation;
+
+		app.onactivated = function (args) {
+			if (args.detail.kind === activation.ActivationKind.launch) {
+				if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated)
+				{
+					// TODO: This application has been newly launched.
+				}
+				else
+				{
+					// This application has been reactivated from suspension.
+					cr_setSuspended(false);
+				}
+				args.setPromise(WinJS.UI.processAll());
+			}
+		};
+
+		app.oncheckpoint = function (args) {
+			// This application is about to be suspended.
+			cr_setSuspended(true);
+		};
+		
+		Windows.UI.WebUI.WebUIApplication.addEventListener("resuming", function () {
+		    cr_setSuspended(false);
+		}, false);
+	
+	 })();
+    </script>
+</body> 
+</html> 

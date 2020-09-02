@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="[[[guid2]]]" Version="[[[version]]]" />
+  <Properties>
+    <DisplayName>[[[displayname]]]</DisplayName>
+    <Description>[[[description]]]</Description>
+    <PublisherDisplayName>[[[publisherdisplayname]]]</PublisherDisplayName>
+    <Logo>app-storelogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.0</OSMinVersion>
+    <OSMaxVersionTested>6.2.0</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="index.html">
+      <VisualElements DisplayName="[[[appdisplayname]]]" Logo="app-logo.png" SmallLogo="app-smalllogo.png" Description="[[[appdescription]]]" ForegroundText="light" BackgroundColor="#464646">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="splashscreen.png" />
+		[[[orientations]]]
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+	[[[capabilities]]]
+  </Capabilities>
+</Package>
