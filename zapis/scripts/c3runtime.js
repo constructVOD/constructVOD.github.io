@@ -2999,6 +2999,7 @@ false;this._errorMessage=err["message"];await this.TriggerAsync(C3.Plugins.Speec
 		{Sprite: 0},
 		{Text4: 0},
 		{Text5: 0},
+		{Sprite2: 0},
 		{saveAvaliable: 0},
 		{pozycja: 0},
 		{pickedMiesiac: 0}
