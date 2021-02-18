@@ -3129,7 +3129,7 @@ value:this.WaveFunc(this._i)*this._mag}]}]}}};
 			return () => and(and(n0.ExpObject(), " x "), n1.ExpObject());
 		},
 		() => "Not supported! Try using Chrome",
-		() => 18,
+		() => 19,
 		() => "video",
 		() => 99,
 		() => "snapshot",
