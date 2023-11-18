@@ -1,0 +1,33 @@
+﻿{
+	"version": 1579093261,
+	"fileList": [
+		"data.js",
+		"c2runtime.js",
+		"jquery-3.4.1.min.js",
+		"offlineClient.js",
+		"images/player-sheet0.png",
+		"images/playerbullet-sheet0.png",
+		"images/enemy-sheet0.png",
+		"images/hud.png",
+		"images/tiledbackground.png",
+		"images/timetxt.png",
+		"images/starscoreicon-sheet0.png",
+		"images/star-sheet0.png",
+		"images/perfect-sheet0.png",
+		"images/killstext.png",
+		"media/scoreadd.m4a",
+		"media/scoreadd.ogg",
+		"media/level end 2.m4a",
+		"media/level end 2.ogg",
+		"media/hit.m4a",
+		"media/hit.ogg",
+		"media/fun bonus explode 5_001.m4a",
+		"media/fun bonus explode 5_001.ogg",
+		"icon-16.png",
+		"icon-32.png",
+		"icon-114.png",
+		"icon-128.png",
+		"icon-256.png",
+		"loading-logo.png"
+	]
+}
