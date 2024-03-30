@@ -123,9 +123,11 @@ class GltfModel
         const finalColor = vec4.create();
 
         const tmpModelView = mat4.create();
+        const tmpProjection = mat4.create();
         const modelRotate = mat4.create();
         if (!this.inst.isEditor) {
             mat4.copy(tmpModelView, renderer._matMV);
+            if (this.inst.fragLight) mat4.copy(tmpProjection, renderer._matP);
             const xAngle = this.inst.xAngle;
             const yAngle = this.inst.yAngle;
             const zAngle = this.inst.zAngle;
@@ -145,7 +147,13 @@ class GltfModel
             // from rotationtranslationscaleorigin
             mat4.copy(this.modelRotate, modelRotate);
             mat4.multiply(modelRotate, tmpModelView, modelRotate);
+            if (this.inst.fragLight) mat4.multiply(modelRotate, renderer._matP, modelRotate);
             renderer.SetModelViewMatrix(modelRotate);
+            if (this.inst.fragLight) {
+                const encodedModelRotate = mat4.clone(this.modelRotate);
+                encodedModelRotate[3] = encodedModelRotate[12] + 11000000
+                renderer.SetProjectionMatrix(encodedModelRotate);
+            }
         }
 
         // Default color
@@ -171,6 +179,19 @@ class GltfModel
             const rotateMaterial = materialsModify.has(material?.name) && materialsModify.get(material?.name)?.rotateUV;
             const lightUpdate = this.inst.lightUpdate || (drawLights.length == 0)
             const vertexScale = this.inst.vertexScale
+            let isSpriteTexture = false
+            let rWidth = null
+            let rHeight = null
+            let rOffsetX = null
+            let rOffsetY = null
+            const imageInfo = !this.inst.instanceTexture ? null : this.inst.isEditor ? null : this.inst._objectClass.GetImageInfo();
+            const textureRect = !this.inst.instanceTexture ? null : this.inst.isEditor ? this.inst.GetTexRect() : imageInfo.GetTexRect();
+            if (this.inst.instanceTexture) {
+                rWidth = textureRect.width();
+                rHeight = textureRect.height();
+                rOffsetX = textureRect.getLeft();
+                rOffsetY = textureRect.getTop();
+            }
 
             // Check if the map this.inst.materialsModify contains the key material.name
             // If it does, then we need to offset the UVs
@@ -199,7 +220,22 @@ class GltfModel
                         currentTexture = whiteTexture;
                     }
                 } else {
-                    const texture = textures[material.name];
+                    let texture = textures[material.name];
+                    if (this.inst.spriteTextures.has(material.name)) {
+                        const uid = this.inst.spriteTextures.get(material.name)
+                        const spriteInst = this._runtime.GetInstanceByUID(uid)
+                        if (spriteInst) {
+                            isSpriteTexture = true
+                            texture = spriteInst.GetSdkInstance().GetTexture();
+                            const texQuad = spriteInst.GetSdkInstance().GetTexQuad();
+                            rOffsetX = texQuad.getTlx();
+                            rOffsetY = texQuad.getTly();
+                            rWidth = texQuad.getTrx() - texQuad.getTlx();
+                            rHeight = texQuad.getBly() - texQuad.getTly();
+                        } else {
+                            console.warn("Sprite texture not found from uid, for 3Dobject uid", uid, this.inst.uid)
+                        }
+                    }
                     // If texture is not loaded, skip rendering
                     if (!texture) continue;
                     if (texture != currentTexture) {
@@ -292,7 +328,20 @@ class GltfModel
                                 uv[ind[i*3+2]*2+0], uv[ind[i*3+2]*2+1],
                                 uv[ind[i*3+2]*2+0], uv[ind[i*3+2]*2+1]
                                 );
-                        }    
+                        }
+                        if (this.inst.instanceTexture || isSpriteTexture) {
+                            tempQuad.setTlx(tempQuad.getTlx() * rWidth + rOffsetX);
+                            tempQuad.setTly(tempQuad.getTly() * rHeight + rOffsetY);
+                            tempQuad.setTrx(tempQuad.getTrx() * rWidth + rOffsetX);
+                            tempQuad.setTry(tempQuad.getTry() * rHeight + rOffsetY);
+                            tempQuad.setBlx(tempQuad.getBlx() * rWidth + rOffsetX);
+                            tempQuad.setBly(tempQuad.getBly() * rHeight + rOffsetY);
+                            tempQuad.setBrx(tempQuad.getBrx() * rWidth + rOffsetX);
+                            tempQuad.setBry(tempQuad.getBry() * rHeight + rOffsetY);
+                            /*
+		const rcTex = imageInfo.GetTexRect();
+        */
+                        }
                     } else
                     {
                         // Set face to color if possible
@@ -430,6 +479,7 @@ class GltfModel
         // Restore modelview matrix
         if (!(this.inst.isEditor || this.inst.cpuXform)) {
             renderer.SetModelViewMatrix(tmpModelView);
+            if (this.inst.fragLight) renderer.SetProjectionMatrix(tmpProjection);
         }
         this.inst.totalTriangles = totalTriangles;
     }
